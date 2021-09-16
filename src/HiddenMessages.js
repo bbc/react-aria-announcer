@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const hiddenStyling = {
@@ -10,55 +10,46 @@ const hiddenStyling = {
   overflow: 'hidden',
 };
 
-function MessageA({ message, className }) {
+const MessageA = ({ message, className }) => (
+  <div className={`messageA AM-hidden ${className}`} >
+    {message}
+  </div>
+);
+
+const MessageB = ({ message, className }) => (
+  <div className={`messageB AM-hidden ${className}`} >
+    {message}
+  </div>
+);
+
+const HiddenMessages = (props) => {
+  const { message, timeStamp, manner, className } = props;
+
+  const [isMessageA, setIsMessageA] = useState(false);
+
+  useEffect(() => {
+    console.log('timestamp changed....');
+    setIsMessageA(!isMessageA);
+  }, [timeStamp]);
+
+  console.log('isMessageA', isMessageA);
+
   return (
-    <div className={`messageA AM-hidden ${className}`} >
-      {message}
+    <div
+      aria-live={manner}
+      aria-relevant="all"
+      aria-atomic
+      className={`AM-hidden ${className}`}
+      style={hiddenStyling}
+    >
+      {`${isMessageA}`}
+      {isMessageA
+        ? <MessageA message={message} manner={manner} className={className} />
+        : <MessageB message={message} manner={manner} className={className} />
+      }
     </div>
   );
-}
-
-function MessageB({ message, className }) {
-  return (
-    <div className={`messageB AM-hidden ${className}`} >
-      {message}
-    </div>
-  );
-}
-
-export class HiddenMessages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      messageA: true,
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.timeStamp !== prevProps.timeStamp) {
-      this.setState({ messageA: !this.state.messageA });
-    }
-  }
-  
-  render() {
-    const { message, manner, className } = this.props;
-    return (
-      <div
-        aria-live={manner}
-        aria-relevant="all"
-        aria-atomic
-        className={`AM-hidden ${className}`}
-        style={hiddenStyling}
-      > 
-        { this.state.messageA ?
-          <MessageA message={message} manner={manner} className={className} />
-        :
-          <MessageB message={message} manner={manner} className={className}/>
-        } 
-      </div>
-    );
-  }
-}
+};
 
 HiddenMessages.proptypes = {
   message: PropTypes.string,
@@ -69,4 +60,9 @@ HiddenMessages.proptypes = {
 
 HiddenMessages.defaultProps = {
   manner: 'polite',
+  className: '',
+};
+
+export {
+  HiddenMessages,
 };

@@ -8,11 +8,11 @@ const connectAriaAnnouncementProvider = (Section) => {
       const message = ariaMessages[action](...args);
       return announce(message, Date.now());
     }
-  
+
     return (
-      <AnnounceMessageContext.Provider value={triggerAnnouncement} > 
+      <AnnounceMessageContext.Provider value={triggerAnnouncement} >
         <Section {...props} ref={ref} />
-      </AnnounceMessageContext.Provider> 
+      </AnnounceMessageContext.Provider>
     );
   })
   return ConnectedAriaLiveAnnouncements;
@@ -22,9 +22,9 @@ const connectAriaAnnouncementConsumer = (Component) => {
   function ConnectedAriaAnnouncer(props) {
     return (
       <AnnounceMessageContext.Consumer>
-            {((triggerAnnouncement) => {
-              return <Component announce={triggerAnnouncement} {...props} />;
-            })}
+        {((triggerAnnouncement) => {
+          return <Component announce={triggerAnnouncement} {...props} />;
+        })}
       </AnnounceMessageContext.Consumer>
     );
   }
