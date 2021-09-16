@@ -28,11 +28,8 @@ const HiddenMessages = (props) => {
   const [isMessageA, setIsMessageA] = useState(false);
 
   useEffect(() => {
-    console.log('timestamp changed....');
     setIsMessageA(!isMessageA);
   }, [timeStamp]);
-
-  console.log('isMessageA', isMessageA);
 
   return (
     <div
@@ -42,7 +39,6 @@ const HiddenMessages = (props) => {
       className={`AM-hidden ${className}`}
       style={hiddenStyling}
     >
-      {`${isMessageA}`}
       {isMessageA
         ? <MessageA message={message} manner={manner} className={className} />
         : <MessageB message={message} manner={manner} className={className} />
