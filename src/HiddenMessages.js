@@ -15,7 +15,7 @@ function MessageA({ message, className }) {
     <div className={`messageA AM-hidden ${className}`} >
       {message}
     </div>
-  )
+  );
 }
 
 function MessageB({ message, className }) {
@@ -23,7 +23,7 @@ function MessageB({ message, className }) {
     <div className={`messageB AM-hidden ${className}`} >
       {message}
     </div>
-  )
+  );
 }
 
 export class HiddenMessages extends React.Component {
@@ -31,26 +31,32 @@ export class HiddenMessages extends React.Component {
     super(props);
     this.state = {
       messageA: true,
-    }
+    };
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.timeStamp !== prevProps.timeStamp) {
-      this.setState({ messageA: !this.state.messageA })
+      this.setState({ messageA: !this.state.messageA });
     }
   }
   
   render() {
     const { message, manner, className } = this.props;
     return (
-      <div className={`AM-hidden ${className}`} aria-live={manner} style={hiddenStyling}> 
+      <div
+        aria-live={manner}
+        aria-relevant="all"
+        aria-atomic
+        className={`AM-hidden ${className}`}
+        style={hiddenStyling}
+      > 
         { this.state.messageA ?
           <MessageA message={message} manner={manner} className={className} />
         :
           <MessageB message={message} manner={manner} className={className}/>
         } 
       </div>
-    )
+    );
   }
 }
 
@@ -59,8 +65,8 @@ HiddenMessages.proptypes = {
   timeStamp: PropTypes.instanceOf(Date),
   manner: PropTypes.string,
   className: PropTypes.string,
-}
+};
 
 HiddenMessages.defaultProps = {
   manner: 'polite',
-}
+};

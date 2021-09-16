@@ -1,6 +1,6 @@
 {
-  "name": "react-aria-announcer",
-  "version": "1.1.0",
+  "name": "@bbc/react-aria-announcer",
+  "version": "1.2.0",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -15,9 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -34,7 +32,13 @@
     "webpack-dev-server": "^3.1.10",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
-    "jest": "^23.5.0"
+    "jest": "^23.5.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
   },
   "jest": {
     "projects": [
