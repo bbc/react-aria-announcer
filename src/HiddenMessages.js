@@ -34,7 +34,7 @@ const HiddenMessages = (props) => {
   return (
     <div
       aria-live={manner}
-      aria-relevant="all"
+      // aria-relevant="all"
       aria-atomic
       className={`AM-hidden ${className}`}
       style={hiddenStyling}
